@@ -1,6 +1,13 @@
 package com.example.hacknation_bydgo;
 
-import android.animation.Animator;
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -47,7 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Point[] points;
 
-    private Camera camera; // <-- Dodane
+    private Camera camera;
+
+    private LocationManager locationManager;
+    private Marker userMarker;
+    private Location lastKnownLocation;
+    private static final int PERMISSION_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +207,35 @@ public class MainActivity extends AppCompatActivity {
         tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.DEFAULT);
         mapView.getLayerManager().getLayers().add(tileRendererLayer);
 
+        //user marker
+        Drawable userDrawable = ContextCompat.getDrawable(this, R.drawable.marker_undiscovered);
+
+        Bitmap userBitmap = AndroidGraphicFactory.convertToBitmap(userDrawable);
+        userBitmap.incrementRefCount();
+
+        userMarker = new Marker(new LatLong(0, 0), userBitmap, 0, -userBitmap.getHeight() / 2);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        checkLocationPermissionAndStart();
+
+        btnMap.setOnClickListener(v -> {
+            if (lastKnownLocation != null) {
+                LatLong userPos = new LatLong(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+
+                // Centrowanie mapy
+                mapView.getModel().mapViewPosition.animateTo(userPos);
+
+                // Opcjonalnie: Zbliżenie mapy
+                mapView.getModel().mapViewPosition.setZoomLevel((byte) 16);
+
+                Toast.makeText(MainActivity.this, "Twoja lokalizacja", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Czekam na sygnał GPS...", Toast.LENGTH_SHORT).show();
+                // Spróbuj wymusić pobranie ponownie jeśli brak uprawnień
+                checkLocationPermissionAndStart();
+            }
+        });
+
         Drawable drawableUndiscovered = ContextCompat.getDrawable(this, R.drawable.marker_undiscovered);
         Bitmap bitmapUndiscovered = AndroidGraphicFactory.convertToBitmap(drawableUndiscovered);
         bitmapUndiscovered.incrementRefCount();
@@ -259,4 +300,76 @@ public class MainActivity extends AppCompatActivity {
                     .withEndAction(() -> b.setVisibility(View.GONE)).start();
         }
     }
+    private void checkLocationPermissionAndStart() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Jeśli nie mamy uprawnień, poproś o nie
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSION_REQUEST_CODE);
+        } else {
+            // Mamy uprawnienia, startujemy
+            startLocationUpdates();
+        }
+    }
+
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        // Pobierz ostatnią znaną lokalizację od razu, żeby nie czekać
+        Location lastLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (lastLoc == null) {
+            lastLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        if (lastLoc != null) {
+            updateUserMarker(lastLoc);
+        }
+
+        // Nasłuchuj zmian (GPS i Sieć)
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                updateUserMarker(location);
+            }
+            // Pozostałe metody interfejsu mogą być puste w nowszych wersjach Androida
+            @Override public void onProviderEnabled(@NonNull String provider) {}
+            @Override public void onProviderDisabled(@NonNull String provider) {}
+            @Override public void onStatusChanged(String provider, int status, Bundle extras) {}
+        };
+
+        // Aktualizuj co min. 2 sekundy lub 5 metrów
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 5, locationListener);
+    }
+
+    private void updateUserMarker(Location location) {
+        this.lastKnownLocation = location;
+        LatLong latLong = new LatLong(location.getLatitude(), location.getLongitude());
+
+        // Aktualizacja pozycji markera
+        userMarker.setLatLong(latLong);
+
+        // Jeśli marker nie jest jeszcze na mapie, dodaj go
+        if (!mapView.getLayerManager().getLayers().contains(userMarker)) {
+            mapView.getLayerManager().getLayers().add(userMarker);
+        }
+
+        // Wymuś przerysowanie mapy (czasem potrzebne)
+        mapView.getLayerManager().redrawLayers();
+    }
+
+    // Obsługa wyniku zapytania o uprawnienia (gdy użytkownik kliknie "Zezwól")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates();
+            } else {
+                Toast.makeText(this, "Wymagane uprawnienia lokalizacji!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
+
