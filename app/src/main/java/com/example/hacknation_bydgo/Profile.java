@@ -45,7 +45,7 @@ public class Profile extends AppCompatActivity {
         });
 
         // --- OBSŁUGA RESETU ---
-        Button btnReset = findViewById(R.id.btnResetProfile);
+        View btnReset = findViewById(R.id.btnResetProfile);
         btnReset.setOnClickListener(v -> showResetConfirmationDialog());
 
     }
