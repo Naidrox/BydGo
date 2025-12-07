@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="cr4">
+		<item name="cornerSize">4dp</item>
+	</style>
+
+    <style name="CircleMenuButton">
+        <item name="android:layout_width">52dp</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:scaleType">centerInside</item>
+<!--        <item name="android:tint">@color/iconWhite</item>-->
+        <item name="android:tintMode">src_in</item>
+    </style>
+
+    <style name="CircleMenuButton.Yellow" parent="CircleMenuButton">
+        <item name="android:background">@drawable/bg_circle_yellow</item>
+    </style>
+
+    <style name="CircleMenuButton.Blue" parent="CircleMenuButton">
+        <item name="android:background">@drawable/bg_circle_blue</item>
+    </style>
+
+    <style name="CircleMenuButton.Red" parent="CircleMenuButton">
+        <item name="android:background">@drawable/bg_circle_red</item>
+    </style>
+
+</resources>
