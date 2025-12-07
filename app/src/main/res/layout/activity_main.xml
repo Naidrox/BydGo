@@ -71,18 +71,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RESET BUTTON (DEV ONLY) -->
-    <!-- RESET BUTTON (DEV ONLY, LEFT-BOTTOM) -->
-    <ImageButton
-        android:id="@+id/btnReset"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_shutter"
-        android:contentDescription="Reset Points"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

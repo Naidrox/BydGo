@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-12-06T17:54:56.043651881Z">
+        <DropdownSelection timestamp="2025-12-07T08:11:02.409056510Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RZCXB08FJSP" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/home/naidrox/.android/avd/Medium_Phone.avd" />
             </handle>
           </Target>
         </DropdownSelection>

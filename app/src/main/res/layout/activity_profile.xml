@@ -75,7 +75,7 @@
 					android:layout_marginBottom="17dp"
 					android:layout_height="wrap_content"
 					android:layout_width="wrap_content"
-					android:text="Witaj, użytkownik!"
+					android:text="Witaj, [użytkownik]!"
 				/>
 				<LinearLayout
 					android:id="@+id/rugcpe0z8aal"
@@ -462,6 +462,23 @@
 					android:text="Powrót"
 				/>
 			</LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnResetProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_circle_red"
+                android:text="Reset danych użytkownika"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:padding="12dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/twoje_id_listy_zabytkow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

@@ -16,7 +16,7 @@ public class Home extends AppCompatActivity {
         // Przycisk Powrót
         TextView buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(v -> finish());
-
+/*
         // Tutaj można opcjonalnie ustawić dynamiczną treść,
         // jeśli np. lista autorów lub drużyny ma pochodzić z repozytorium.
         TextView authorsList = findViewById(R.id.homeAuthorsList);
@@ -32,6 +32,6 @@ public class Home extends AppCompatActivity {
                         "Programiści Android\n" +
                         "Projektanci UX/UI\n\n" +
                         "Projekt ma na celu edukację oraz promocję zabytków i miejsc w Bydgoszczy."
-        );
+        );*/
     }
 }
