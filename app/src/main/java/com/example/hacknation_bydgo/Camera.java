@@ -85,10 +85,13 @@ public class Camera {
 
             Module module = Module.load(assetFilePath("model.pt"));
 
+            float[] MEAN = {0.0f, 0.0f, 0.0f};
+            float[] STD = {1.0f, 1.0f, 1.0f};
+
             Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(
                     resized,
-                    TensorImageUtils.TORCHVISION_NORM_MEAN_RGB,
-                    TensorImageUtils.TORCHVISION_NORM_STD_RGB
+                    MEAN,
+                    STD
             );
 
             Tensor outputTensor = module.forward(IValue.from(inputTensor)).toTensor();
@@ -107,7 +110,7 @@ public class Camera {
             lastPredictedScore = scores[maxIndex];
             wasUnlocked = false; // reset flagi
 
-            if (scores[maxIndex] > 10) {
+            if (scores[maxIndex] > 4) {
                 Point[] allPoints = PointsStorage.loadPoints(activity, PointsRepository.getAllPoints());
 
                 for (Point p : allPoints) {

@@ -3,6 +3,9 @@ package com.example.hacknation_bydgo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.app.AlertDialog;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
@@ -41,6 +44,36 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        // --- OBSŁUGA RESETU ---
+        Button btnReset = findViewById(R.id.btnResetProfile);
+        btnReset.setOnClickListener(v -> showResetConfirmationDialog());
+
+    }
+
+    private void showResetConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Reset postępów")
+                .setMessage("Czy na pewno chcesz usunąć wszystkie odwiedzone miejsca? Tej operacji nie można cofnąć.")
+                .setPositiveButton("Resetuj", (dialog, which) -> {
+                    performReset();
+                })
+                .setNegativeButton("Anuluj", null)
+                .show();
+    }
+
+    private void performReset() {
+        // 1. Wyczyść SharedPreferences
+        getSharedPreferences("points_storage", MODE_PRIVATE).edit().clear().apply();
+
+        // 2. Przywróć domyślne punkty (wszystkie jako nieodwiedzone)
+        Point[] defaultPoints = PointsRepository.getAllPoints();
+        PointsStorage.savePoints(this, defaultPoints);
+
+        // 3. Informacja dla użytkownika
+        Toast.makeText(this, "Postępy zostały zresetowane", Toast.LENGTH_SHORT).show();
+
+        // 4. Odśwież ekran profilu (przeładowanie aktywności)
+        recreate();
     }
 
 }

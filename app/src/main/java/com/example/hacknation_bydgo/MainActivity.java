@@ -82,46 +82,9 @@ public class MainActivity extends AppCompatActivity {
             if (menuOpen) collapseMenu(extraButtons);
             else expandMenu(extraButtons);
         });
-        btnOne.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, Location.class)));
+        btnOne.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, com.example.hacknation_bydgo.Location.class)));
         btnTwo.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, Home.class)));
 
-        // RESET BUTTON - DEV ONLY
-
-        ImageButton btnReset = findViewById(R.id.btnReset);
-        btnReset.setOnClickListener(v -> {
-            // Reset wszystkich punktów
-            getSharedPreferences("points_storage", MODE_PRIVATE).edit().clear().apply();
-
-            // Przywróć domyślne punkty
-            points = PointsRepository.getAllPoints();
-            PointsStorage.savePoints(MainActivity.this, points);
-
-            // Odśwież markery na mapie
-            for (int i = mapView.getLayerManager().getLayers().size() - 1; i >= 0; i--) {
-                if (mapView.getLayerManager().getLayers().get(i) instanceof Marker) {
-                    mapView.getLayerManager().getLayers().remove(i);
-                }
-            }
-
-            Drawable drawableUndiscovered = ContextCompat.getDrawable(this, R.drawable.marker_undiscovered);
-            Bitmap bitmapUndiscovered = AndroidGraphicFactory.convertToBitmap(drawableUndiscovered);
-            bitmapUndiscovered.incrementRefCount();
-
-            Drawable drawableDiscovered = ContextCompat.getDrawable(this, R.drawable.marker_discovered);
-            Bitmap bitmapDiscovered = AndroidGraphicFactory.convertToBitmap(drawableDiscovered);
-            bitmapDiscovered.incrementRefCount();
-
-            for (Point p : points) {
-                LatLong latLong = new LatLong(p.getLat(), p.getLon());
-                Bitmap bmp = p.isVisited() ? bitmapDiscovered : bitmapUndiscovered;
-                Marker marker = new Marker(latLong, bmp, 0, -bmp.getHeight() / 2);
-                mapView.getLayerManager().getLayers().add(marker);
-            }
-
-            Toast.makeText(MainActivity.this, "Wszystkie punkty zresetowane", Toast.LENGTH_SHORT).show();
-        });
-
-        // RESET BUTTON END
 
         // --- Kamera ---
         btnShutter.setOnClickListener(v -> camera.takePhoto());
