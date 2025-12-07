@@ -110,7 +110,7 @@ public class Camera {
             lastPredictedScore = scores[maxIndex];
             wasUnlocked = false; // reset flagi
 
-            if (scores[maxIndex] > 4) {
+            if (scores[maxIndex] > 3) {
                 Point[] allPoints = PointsStorage.loadPoints(activity, PointsRepository.getAllPoints());
 
                 for (Point p : allPoints) {
