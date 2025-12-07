@@ -5,7 +5,7 @@ public class PointsRepository {
     public static Point[] getAllPoints() {
         return new Point[]{
                 new Point(
-                        7,
+                        6,
                         53.12718771883385,
                         18.017303952184417,
                         "Bazylika Rzymskokatolicka pw. św. Wincentego a Paulo",
@@ -17,7 +17,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        6,
+                        5,
                         53.12300096284042,
                         17.999071853783683,
                         "Katedra pw. św. Marcina i Mikołaja",
@@ -29,7 +29,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        8,
+                        7,
                         53.1241,
                         18.0102,
                         "Spichrze nad Brdą",
@@ -42,7 +42,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        5,
+                        4,
                         53.1205,  // przykładowa szerokość geograficzna
                         18.0080,  // przykładowa długość geograficzna
                         "Wieża Ciśnień Muzeum Wodociągów",
@@ -52,7 +52,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        4,
+                        3,
                         53.1230,  // przykładowa szerokość geograficzna
                         18.0065,  // przykładowa długość geograficzna
                         "Pomnik Kazimierza III Wielkiego",
@@ -64,7 +64,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        3,
+                        2,
                         53.1238,  // przykładowa szerokość geograficzna
                         18.0072,  // przykładowa długość geograficzna
                         "Przechodzący przez rzekę",
@@ -73,7 +73,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        2,
+                        1,
                         53.1231,  // przykładowa szerokość geograficzna
                         18.0065,  // przykładowa długość geograficzna
                         "Pomnik Walki i Męczeństwa Ziemi Bydgoskiej",
@@ -83,7 +83,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        1,
+                        0,
                         53.1215,  // przykładowa szerokość geograficzna
                         18.0078,  // przykładowa długość geograficzna
                         "Fontanna Potop",
