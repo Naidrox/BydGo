@@ -5,25 +5,7 @@ public class PointsRepository {
     public static Point[] getAllPoints() {
         return new Point[]{
                 new Point(
-                        1,
-                        53.122923775452755,
-                        17.99495801801664,
-                        "Młyny Rothera",
-                        "Młyny Rothera to jeden z wielu zabytków bydgoskich. Jest to kompleks, który składa się z:\n" +
-                                "- młyna\n" +
-                                "- przylegających do niego dwóch spichrzy: zbożowego i mącznego\n" +
-                                "- kotłowni\n" +
-                                "- łazienek\n\n" +
-                                "Powstał w połowie XIX wieku z inicjatywy pruskiego urzędnika Christiana von Rothera – na wzmocnionym grząskim terenie. Działał jako nowoczesny młyn napędzany wodą i produkował około 40 ton mąki dziennie, a do pracy wystarczała zaledwie 11-osobowa załoga. Architekt Młynów pozostaje nieznany.\n\n" +
-                                "Budynki przetrwały II wojnę światową, jednak ich wyposażenie zostało wywiezione, a młyny wykorzystywano już tylko jako magazyny. W 1948 r. zostały częścią Polskich Zakładów Zbożowych. W latach 60. zasypano kanał zbożowy.\n\n" +
-                                "W 1992 r. zostały wykupione przez prywatnych inwestorów, jednak ich plany na otwarcie hotelu oraz parku rozrywki nigdy nie zostały ukończone. Zabytkowy obiekt został objęty ochroną konserwatorską i zaczął niszczeć.\n\n" +
-                                "W 2013 r. rozpoczęto renowację zabytku. W 2019 r. powołana została instytucja kultury, mająca na celu wypełnienie Młynów życiem a w kwietniu 2021 r. zostały zakończone prace renowacyjne. W listopadzie 2021 roku mieszkańcy uzyskali dostęp do części ogólnodostępnej Młynów. W latach 2022-2024 uruchamiane zostały kolejne wydarzenia, punkty gastronomiczne oraz wystawy.\n\n" +
-                                "Młyny zostały wypełnione życiem i w przyszłości powstaną tu kolejne przestrzenie, m. in. sklep z designem, pracownia kulinarna oraz przestrzeń zabaw.",
-                        false
-                ),
-
-                new Point(
-                        2,
+                        7,
                         53.12718771883385,
                         18.017303952184417,
                         "Bazylika Rzymskokatolicka pw. św. Wincentego a Paulo",
@@ -35,7 +17,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        3,
+                        6,
                         53.12300096284042,
                         17.999071853783683,
                         "Katedra pw. św. Marcina i Mikołaja",
@@ -47,7 +29,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        4,
+                        8,
                         53.1241,
                         18.0102,
                         "Spichrze nad Brdą",
@@ -70,7 +52,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        6,
+                        4,
                         53.1230,  // przykładowa szerokość geograficzna
                         18.0065,  // przykładowa długość geograficzna
                         "Pomnik Kazimierza III Wielkiego",
@@ -82,7 +64,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        7,
+                        3,
                         53.1238,  // przykładowa szerokość geograficzna
                         18.0072,  // przykładowa długość geograficzna
                         "Przechodzący przez rzekę",
@@ -91,7 +73,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        8,
+                        2,
                         53.1231,  // przykładowa szerokość geograficzna
                         18.0065,  // przykładowa długość geograficzna
                         "Pomnik Walki i Męczeństwa Ziemi Bydgoskiej",
@@ -101,7 +83,7 @@ public class PointsRepository {
                         false
                 ),
                 new Point(
-                        9,
+                        1,
                         53.1215,  // przykładowa szerokość geograficzna
                         18.0078,  // przykładowa długość geograficzna
                         "Fontanna Potop",
